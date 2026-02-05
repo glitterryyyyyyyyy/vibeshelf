@@ -1,0 +1,165 @@
+/* Page-scoped pink styling for the BookDetail view */
+.book-detail-pink {
+  /* subtle darkening of the page background to be a touch less bright */
+  background: linear-gradient(180deg, #fff4f7 0%, #ffebf2 100%);
+}
+
+/* Replace the dark slate card backgrounds with soft pink cards */
+.book-detail-pink .bg-slate-800 {
+  /* softer pink card instead of pure white */
+  background: linear-gradient(180deg, #fff3f8 0%, #ffe6ef 100%) !important;
+  /* stronger border for better separation in light mode */
+  border: 1px solid rgba(200,50,100,0.28) !important;
+  box-shadow: 0 20px 56px rgba(255,100,140,0.12) !important;
+  color: #40242b;
+}
+
+/* Make text warm pinks instead of gray where appropriate */
+.book-detail-pink h1, .book-detail-pink h2, .book-detail-pink h3, .book-detail-pink .text-rose-500 {
+  color: #7b1536 !important; /* deeper rosy heading */
+}
+.book-detail-pink .text-gray-100 { color: #2b2026 !important; }
+.book-detail-pink .text-gray-300 { color: #5a3f48 !important; }
+.book-detail-pink .text-gray-400 { color: #6f5058 !important; }
+
+/* Tweak buttons to be pink and friendly */
+.book-detail-pink .bg-rose-600, .book-detail-pink .bg-rose-600:hover {
+  background: linear-gradient(180deg,#ff7aa3,#ff4f83) !important;
+  box-shadow: 0 10px 30px rgba(255,90,140,0.14) !important;
+}
+
+.book-detail-pink button.p-3.rounded { background: linear-gradient(180deg,#ffe7f0,#ffd0e0); color: #6b1130; border:1px solid rgba(255,140,180,0.14); }
+
+/* Make star ratings and accents rosy */
+.book-detail-pink .text-rose-400, .book-detail-pink .text-rose-600 { color: #b81c47 !important; }
+
+/* Image frame: add a cute pink border and rounded corners */
+.book-detail-pink .bg-slate-800 > img, .book-detail-pink .bg-slate-800 img {
+  border-radius: 8px; display:block; width:100%; height:auto; box-shadow: 0 14px 36px rgba(255,120,160,0.10);
+  /* slightly stronger image frame border for better contrast */
+  border: 1px solid rgba(200,50,100,0.26);
+}
+
+/* Reviews and inputs: soften background and use pink outlines */
+.book-detail-pink textarea { background: linear-gradient(180deg,#fff,#fff6f8) !important; color: #32222d !important; }
+.book-detail-pink .border-2.border-rose-600 { border-color: rgba(220,50,100,0.9) !important; }
+
+/* New layout and CTA styles for a lavender/purple card aesthetic */
+.book-card { background: linear-gradient(180deg, rgba(250,245,255,0.9), rgba(245,240,255,0.7)); border-radius: 18px; padding: 24px; border: 1px solid rgba(120,80,160,0.06); box-shadow: 0 20px 60px rgba(120,80,160,0.06); }
+.book-card .cover-frame { background: linear-gradient(180deg,#fff,#faf6ff); border: 1px solid rgba(160,120,200,0.12); }
+.book-card .cover-image { display:block; width:100%; height:auto; border-radius: 10px; object-fit:cover; }
+.book-title { font-size: 2.25rem; font-weight: 700; color: #3b0750; margin: 0 0 6px 0; text-align: left; font-family: 'Georgia', serif; }
+.book-author { font-size: 1.05rem; font-style: italic; color: #7b2a9b; margin-bottom: 8px; }
+.shadow-inner { box-shadow: inset 0 2px 0 rgba(255,255,255,0.6), 0 18px 48px rgba(80,30,120,0.06); }
+
+/* CTA buttons */
+.btn-primary, .btn-secondary, .btn-ghost { padding: 0.75rem 1.25rem; border-radius: 999px; font-weight: 600; cursor: pointer; border: none; }
+.btn-primary { background: linear-gradient(180deg,#7b3bd6,#6a2bb8); color: #fff; box-shadow: 0 8px 30px rgba(107,43,184,0.22); }
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-secondary { background: linear-gradient(180deg,#ffdff6,#ffd0f0); color: #6a2b68; border: 1px solid rgba(110,50,120,0.06); }
+.btn-ghost { background: transparent; color: #5f2b6e; border: 1px dashed rgba(120,70,150,0.12); }
+
+/* responsive small tweaks */
+@media (max-width: 768px) {
+  .book-title { font-size: 1.6rem; text-align:center; }
+  .book-author { text-align:center; }
+  .cover-column { display:flex; align-items:center; }
+  .book-card { padding: 16px; }
+}
+
+/* Keep dark mode lavender rather than heavy black */
+.dark .book-card { background: linear-gradient(180deg, rgba(245,240,255,0.95), rgba(235,225,250,0.9)) !important; }
+.dark .book-title { color: #2b003f !important; }
+
+/* Ensure the container padding feels airy */
+.book-detail-pink .p-6 { padding: 1.25rem !important; }
+
+/* Mobile tweaks: make cards slightly larger on small screens */
+@media (max-width: 768px) {
+  .book-detail-pink .bg-slate-800 { padding: 1rem !important; }
+}
+
+/* =========================================
+   STRICT DARK MODE OVERRIDES
+   "Dark means DARK" - No pink allowed.
+   ========================================= */
+
+html.dark .book-detail-pink {
+  background: transparent !important; /* Let body background show through */
+}
+
+/* Reset cards to dark gray */
+html.dark .book-detail-pink .bg-slate-800 {
+  background: #1f2937 !important; /* bg-gray-800 */
+  border: 1px solid #374151 !important; /* border-gray-700 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+  color: #f3f4f6 !important;
+}
+
+/* Reset Text Colors */
+html.dark .book-detail-pink h1,
+html.dark .book-detail-pink h2,
+html.dark .book-detail-pink h3 {
+  color: #f3f4f6 !important; /* text-gray-100 */
+}
+
+html.dark .book-detail-pink .text-rose-500,
+html.dark .book-detail-pink .text-rose-400 {
+  color: #fb7185 !important; /* text-rose-400 (keep accent, but light) */
+}
+
+html.dark .book-detail-pink .text-gray-100,
+html.dark .book-detail-pink .text-gray-300,
+html.dark .book-detail-pink .text-gray-400 {
+  color: #9ca3af !important; /* text-gray-400 */
+}
+
+/* Fix Inputs / Textareas */
+html.dark .book-detail-pink textarea {
+  background: #374151 !important; /* bg-gray-700 */
+  color: #f3f4f6 !important;
+  border-color: #4b5563 !important;
+}
+
+/* Fix Buttons */
+html.dark .book-detail-pink .bg-rose-600 {
+  background: #e11d48 !important; /* rose-600 standard */
+  box-shadow: none !important;
+  color: white !important;
+}
+html.dark .book-detail-pink .bg-rose-600:hover {
+  background: #be123c !important; /* rose-700 */
+}
+
+html.dark .book-detail-pink button.p-3.rounded {
+  background: #374151 !important; /* gray-700 */
+  color: #e5e7eb !important;
+  border: 1px solid #4b5563 !important;
+}
+
+/* Selected button state (Reading Status) */
+html.dark .book-detail-pink button.bg-blue-500 {
+  background: #3b82f6 !important;
+  color: white !important;
+}
+html.dark .book-detail-pink button.bg-green-500 {
+  background: #22c55e !important;
+  color: white !important;
+}
+html.dark .book-detail-pink button.bg-gray-500 {
+  background: #6b7280 !important;
+  color: white !important;
+}
+
+/* Image styling reset */
+html.dark .book-detail-pink .bg-slate-800 > img,
+html.dark .book-detail-pink .bg-slate-800 img {
+  border: 1px solid #374151 !important;
+  box-shadow: none !important;
+}
+
+/* Modal Fix */
+html.dark .bg-slate-800 .text-rose-500 {
+  color: #fb7185 !important;
+}
+

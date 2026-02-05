@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GLOBAL THEME ROOT */
+body {
+  /* Premium Light Gradient */
+  background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 100%);
+  @apply text-rose-900 font-serif transition-colors duration-300 min-h-screen;
+}
+
+/* Dark Mode Global Overrides */
+html.dark body {
+  background: #111827; /* Force flat dark gray, removes gradient */
+  @apply text-gray-100;
+}
+
+h1, h2, h3 {
+  @apply font-serif;
+}
+
+button {
+  @apply transition duration-300 ease-in-out;
+}
+
+input::placeholder {
+  @apply text-rose-300 dark:text-gray-500;
+}
+
+/* Shimmer animation for loading images */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite ease-in-out;
+}
+
+/* Navbar Gradient - Light Mode */
+.app-navbar {
+  background: linear-gradient(90deg, #9f1f47 0%, #e83b6f 14%, #ff86bf 40%, #ffb0d4 60%, #e83b6f 82%, #9f1f47 100%);
+  border-bottom: 2px solid rgba(120,18,50,0.65);
+  box-shadow: 0 8px 30px rgba(160,40,80,0.08);
+}
+
+/* Navbar Gradient - Dark Mode */
+.dark .app-navbar {
+  background: #1f2937; /* gray-800 */
+  border-bottom: 1px solid #374151; /* gray-700 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}

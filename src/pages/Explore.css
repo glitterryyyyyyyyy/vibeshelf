@@ -1,0 +1,682 @@
+/* Styles scoped to the Explore page's GenreDropdown component */
+
+.genre-toggle { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 8px 12px; }
+.genre-placeholder { color: #b83b62; font-weight: 600; }
+.genre-pill { background: linear-gradient(90deg, rgba(255,230,240,0.9), rgba(255,210,230,0.9)); color: #6b1130; padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 12px; box-shadow: 0 6px 18px rgba(245,155,185,0.08); border: 1px solid rgba(255,180,200,0.5); }
+
+.genre-search { background: linear-gradient(90deg, #fff, #fff6f9); border: 1px solid rgba(255,200,220,0.6); box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); }
+.genre-search:focus { box-shadow: 0 12px 30px rgba(255,120,160,0.08); border-color: #ff7aa3; }
+
+/* Make the input placeholder text pink so "Filter genres..." matches the design */
+.genre-search::placeholder { color: #f19cb9 !important; opacity: 1; }
+.genre-search:-ms-input-placeholder { color: #fd98b8 !important; }
+.genre-search::-ms-input-placeholder { color: #f4c2d2 !important; }
+
+.genre-list { padding: 4px; max-height: 18rem; overflow:auto; }
+
+/* Pretty pink matching "Select matching" pill and aligned Clear button */
+/* Select-all button: smaller, same color as the Done button */
+.select-all-btn {
+	display:inline-flex;
+	align-items:center;
+	gap:8px;
+	padding:6px 10px;
+	border-radius:10px;
+	background: linear-gradient(180deg,#ff98b8,#ff5f91); /* match .done-btn */
+	color: white;
+	font-weight:800;
+	font-size:13px;
+	border: 2px solid rgba(255,90,140,0.95);
+	box-shadow: 0 8px 22px rgba(255,110,150,0.12);
+	cursor:pointer;
+	transition: transform 160ms cubic-bezier(.2,.9,.2,1), box-shadow 160ms ease;
+}
+.select-all-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(255,110,150,0.16); }
+.select-all-btn:active { transform: translateY(-1px) scale(0.997); }
+.select-all-btn .select-check { width:20px; height:20px; min-width:20px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; background: linear-gradient(180deg,#ffb6d9,#ff6fa6); color:#fff; font-weight:800; box-shadow: 0 5px 14px rgba(255,120,160,0.05); }
+.select-all-btn .select-text { font-size:13px; white-space:nowrap; }
+
+.genre-clear-btn {
+	background: transparent;
+	border: 1px solid rgba(190,120,140,0.08);
+	color: #8b3756;
+	padding:6px 10px;
+	border-radius:8px;
+	font-weight:700;
+	cursor:pointer;
+	transition: background 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+.genre-clear-btn:hover { background: rgba(255,240,245,0.7); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,140,170,0.06); }
+.genre-clear-btn:focus-visible { outline: none; box-shadow: 0 0 0 6px rgba(255,150,180,0.10), 0 8px 20px rgba(255,140,170,0.06); }
+
+.genre-chip { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,250,250,0.96)); border: 1px solid rgba(255,220,230,0.6); transition: transform 160ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms; padding-top:12px; padding-bottom:12px; padding-left:8px; padding-right:12px; position:relative; }
+.genre-chip:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,160,200,0.06); }
+.genre-chip.selected { background: linear-gradient(90deg,#ffeaf2,#ffd4e6); color: #6b1130; border-color: rgba(255,200,215,0.6); }
+
+/* left accent stripe to mimic checked row */
+.genre-chip.selected { overflow: visible; }
+.genre-chip.selected::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 6px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background: linear-gradient(180deg,#ffb6d9,#ff6fa6); box-shadow: 0 6px 18px rgba(255,120,160,0.06); z-index: 1; }
+
+
+.genre-swatch {
+	/* hide decorative color swatches per design request */
+	display: none !important;
+	width: 0; height: 0; margin: 0; padding: 0; border: 0; background: transparent;
+}
+
+
+/* Pagination: bright, tactile, circular page buttons + pill nav to match Explore visuals */
+.explore-pagination { display:flex; align-items:center; gap:1rem; justify-content:center; margin-top:1.5rem; }
+.explore-pagination .nav-pill {
+	position: relative; z-index: 1; display:inline-flex; align-items:center; gap:10px;
+	padding: 12px 24px; border-radius: 999px; font-weight:800; color:#fff;
+	/* multi-stop shiny gradient */
+	background: linear-gradient(135deg,#ff9fc0 0%, #ff6a98 28%, #e53766 62%, #b61444 100%);
+	/* darker framed outline via pseudo element (pink tint) */
+	border: 1px solid rgba(179,58,91,0.18);
+	box-shadow: 0 18px 50px rgba(190,30,80,0.22), 0 6px 18px rgba(0,0,0,0.08), inset 0 -8px 22px rgba(0,0,0,0.12);
+	transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, filter 180ms ease;
+}
+.explore-pagination .nav-pill::after {
+	/* subtle dark outer rim */
+	content: '';
+	position: absolute; left: -4px; right: -4px; top: -4px; bottom: -4px; border-radius: 999px; pointer-events: none; z-index: 0;
+	border: 2px solid rgba(179,58,91,0.18);
+}
+.explore-pagination .nav-pill:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow: none; }
+.explore-pagination .nav-pill:hover { transform: translateY(-8px) scale(1.035); box-shadow: 0 34px 96px rgba(160,30,80,0.28), inset 0 -10px 28px rgba(0,0,0,0.14); }
+.explore-pagination .nav-pill:active { transform: translateY(-2px) scale(0.995); box-shadow: 0 10px 26px rgba(0,0,0,0.16); }
+
+.explore-pagination .page-info { font-size:14px; color:#5e2333; }
+
+.explore-pagination .page-list { display:flex; gap:0.6rem; align-items:center; }
+.explore-pagination .page-list .page-btn {
+	position: relative; z-index: 1; width:48px; height:48px; min-width:48px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; cursor:pointer;
+	background: linear-gradient(180deg,#fff,#fff8fb); color: #d83a63; border: 1px solid rgba(179,58,91,0.08);
+	box-shadow: 0 12px 36px rgba(230,120,160,0.08), inset 0 -6px 14px rgba(0,0,0,0.04);
+	transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 240ms ease, background 220ms ease, color 200ms ease;
+}
+.explore-pagination .page-list .page-btn::after {
+	/* outer rim */
+	content: '';
+	position: absolute; left: -3px; right: -3px; top: -3px; bottom: -3px; border-radius: 999px; pointer-events: none; z-index: 0;
+	border: 2px solid rgba(179,58,91,0.08);
+}
+.explore-pagination .page-list .page-btn:hover { transform: translateY(-8px) scale(1.08); box-shadow: 0 34px 86px rgba(245,120,170,0.16); background: linear-gradient(180deg,#fff,#fff6f9); }
+.explore-pagination .page-list .page-btn:active { transform: translateY(-2px) scale(0.99); }
+.explore-pagination .page-list .page-btn:focus { outline:none; box-shadow: 0 12px 36px rgba(255,120,160,0.14), 0 0 0 8px rgba(255,200,215,0.10); }
+
+.explore-pagination .page-list .page-current {
+	position: relative; z-index: 2; background: linear-gradient(135deg,#ff5988 0%, #e52662 45%, #b30f44 100%); color: #fff; transform: scale(1.08); box-shadow: 0 28px 76px rgba(200,40,80,0.22), inset 0 -10px 28px rgba(0,0,0,0.18); border: 1px solid rgba(179,58,91,0.6);
+}
+.explore-pagination .page-list .page-ellipsis { width:auto; padding:0 8px; color:#b88; font-weight:700; }
+
+/* specular sheen sweep for the active page */
+.explore-pagination .page-list .page-current::before {
+	content: '';
+	position: absolute; left: -30%; top: -40%; width: 60%; height: 180%; transform: rotate(-18deg) translateX(-120%);
+	background: linear-gradient(90deg, rgba(255,255,255,0.55), rgba(255,255,255,0.12), rgba(255,255,255,0));
+	filter: blur(6px); mix-blend-mode: overlay; opacity: 0.9; pointer-events: none; transition: transform 700ms cubic-bezier(.2,.9,.2,1);
+}
+/* Disable sheen in dark mode as requested */
+.dark .explore-pagination .page-list .page-current::before {
+	display: none;
+}
+.explore-pagination .page-list .page-current:hover::before { transform: rotate(-18deg) translateX(120%); }
+
+/* make pagination compact on small screens */
+@media (max-width: 640px) {
+	.explore-pagination { gap:0.6rem; }
+	.explore-pagination .page-list .page-btn { width:40px; height:40px; min-width:40px; font-size:13px; }
+	.explore-pagination .nav-pill { padding: 10px 14px; }
+}
+
+/* Dark mode: invert the page pills but keep the pink accents */
+.dark .explore-pagination .page-list .page-btn { background: #0b1116; color: #ff9fbf; border: 1px solid rgba(255,120,160,0.06); box-shadow: 0 12px 36px rgba(0,0,0,0.6); }
+.dark .explore-pagination .page-list .page-current { background: linear-gradient(135deg,#8b2c4d 0%, #7b2140 60%, #491227 100%); box-shadow: 0 28px 76px rgba(80,20,40,0.6); color:#fff; }
+
+/* custom checkbox visuals (large pink square with animated check) */
+.checkbox-box { width: 34px; height: 34px; min-width:34px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; background:#fff; border:2px solid rgba(255,190,205,0.6); margin-right:12px; box-shadow: 0 8px 22px rgba(255,160,190,0.06), inset 0 1px 0 rgba(255,255,255,0.6); transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 160ms ease, background 180ms ease, border-color 160ms ease; }
+.checkbox-box svg { display:block; opacity:0; transform:scale(0.72); transition: opacity 140ms ease, transform 220ms cubic-bezier(.2,.9,.2,1); }
+.checkbox-box.checked { background: linear-gradient(180deg,#ff98b8,#ff5f91); border-color: rgba(255,90,140,0.95); box-shadow: 0 16px 36px rgba(255,110,150,0.16); transform: translateY(-2px) scale(1.02); }
+
+/* keep native checkbox accessible but visually hidden so browser accent doesn't show */
+.native-checkbox { position:absolute; left:14px; top:50%; transform:translateY(-50%); width:1px; height:1px; padding:0; margin:0; border:0; overflow:hidden; clip:rect(0 0 0 0); clip-path: inset(50%); white-space:nowrap; opacity:0; z-index:4; cursor:pointer; -webkit-appearance:none; appearance:none; background:transparent; accent-color:transparent; }
+.native-checkbox:focus + .checkbox-box { box-shadow: 0 0 0 8px rgba(255,150,180,0.12), 0 8px 22px rgba(255,140,170,0.08); }
+.native-checkbox:checked + .checkbox-box { background: linear-gradient(180deg,#ff7aa3,#ff4f83); border-color: rgba(255,70,120,0.95); box-shadow: 0 18px 44px rgba(255,100,150,0.22); transform: translateY(-2px) scale(1.06); animation: checkbox-pop 360ms cubic-bezier(.2,.9,.2,1); }
+.native-checkbox:checked + .checkbox-box svg { opacity:1; transform:scale(1); transition: transform 180ms cubic-bezier(.2,.9,.2,1), opacity 140ms ease; }
+
+@keyframes checkbox-pop { 0% { transform: translateY(0) scale(0.92);} 40% { transform: translateY(-6px) scale(1.12);} 70% { transform: translateY(-2px) scale(0.98);} 100% { transform: translateY(-2px) scale(1.06);} }
+
+/* circular badge removed: we keep the left accent stripe and the inline checkbox */
+
+/* scrollbar tweak for the genre list */
+.genre-list::-webkit-scrollbar { width: 10px; }
+.genre-list::-webkit-scrollbar-track { background: transparent; }
+.genre-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#ffd7e6,#ff9fbf); border-radius: 8px; border: 2px solid rgba(255,255,255,0.6); }
+
+/* Done button styled like the checkbox: boxed pink with a popping check */
+.done-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	background: linear-gradient(180deg,#ff98b8,#ff5f91);
+	color: white;
+	border: 2px solid rgba(255,90,140,0.95);
+	border-radius: 10px;
+	box-shadow: 0 10px 22px rgba(255,110,150,0.12);
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 1;
+	cursor: pointer;
+	transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 140ms ease, opacity 140ms ease;
+}
+.done-btn:active { transform: translateY(-1px) scale(1.01); }
+.done-btn:focus { outline: none; box-shadow: 0 0 0 6px rgba(255,150,180,0.10), 0 6px 18px rgba(255,140,170,0.06); }
+.done-btn .done-check {
+	width: 22px; height: 22px; min-width:22px; display:inline-flex; align-items:center; justify-content:center; border-radius:7px; background: linear-gradient(180deg,#ffb6d9,#ff6fa6); box-shadow: 0 5px 14px rgba(255,120,160,0.05); border: 2px solid rgba(255,200,215,0.65); color: white; font-size: 14px; transform: translateY(0); transition: transform 180ms cubic-bezier(.2,.9,.2,1);
+}
+.done-btn:active .done-check { transform: translateY(-2px) scale(1.03); }
+
+/* Search suggestions - aesthetic card-like list matching genre visuals */
+.search-suggestions {
+	border-radius: 12px;
+	overflow: hidden;
+	background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,250,250,0.98));
+	border: 1px solid rgba(255,215,225,0.6);
+	box-shadow: 0 20px 50px rgba(255,120,160,0.06);
+}
+.search-suggestions > div:first-child {
+	/* header */
+	background: linear-gradient(90deg, rgba(255,240,245,0.9), rgba(255,250,250,0.98));
+	padding: 12px 16px;
+	font-weight: 700;
+	color: #b83b62;
+}
+.search-suggestions [role="listbox"] { max-height: 18rem; overflow: auto; }
+.search-suggestions button {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	width: 100%;
+	text-align: left;
+	border-bottom: 1px solid rgba(255,230,235,0.5);
+	background: transparent;
+	transition: background 180ms ease, transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms ease;
+}
+.search-suggestions button:hover { background: linear-gradient(90deg, rgba(255,238,245,0.8), rgba(255,245,248,0.85)); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,140,180,0.06); }
+.search-suggestions button[data-active="true"], .search-suggestions button:focus {
+	background: linear-gradient(90deg,#ffeaf2,#ffd4e6);
+	color: #6b1130;
+}
+.search-suggestions .thumb {
+	width: 46px; height: 46px; border-radius: 8px; overflow: hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; background: #fff6f9; border: 1px solid rgba(255,220,230,0.6); box-shadow: 0 6px 16px rgba(255,160,190,0.04);
+}
+.search-suggestions .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.search-suggestions .meta { display:flex; flex-direction:column; }
+.search-suggestions .meta .title { font-weight:700; color:#9b1838; }
+.search-suggestions .meta .sub { font-size:12px; color:#9aa3a8; margin-top:4px; }
+.search-suggestions .chev { width:26px; text-align:center; color:#e11d48; }
+
+
+/* Clear search pill (keeps the same pink aesthetic) */
+.search-clear-pill {
+	background: linear-gradient(180deg,#ffd8e8,#ff9fbf);
+	color: #7a0e3a;
+	border: 1px solid rgba(255,140,170,0.5);
+	padding: 8px 12px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 13px;
+	cursor: pointer;
+	box-shadow: 0 8px 20px rgba(255,150,180,0.06);
+	transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, opacity 120ms ease, filter 180ms ease;
+}
+.search-clear-pill:active { transform: translateY(-1px) scale(1.02); }
+.search-clear-pill:disabled { opacity: 0.5; cursor: not-allowed; }
+
+
+/* New: left-aligned clear pill placed beside the search bar */
+.search-clear-pill-left {
+	background: linear-gradient(180deg,#ffd8e8,#ff9fbf);
+	color: #7a0e3a;
+	border: 1px solid rgba(255,140,170,0.5);
+	padding: 7px 10px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 13px;
+	cursor: pointer;
+	box-shadow: 0 10px 28px rgba(255,140,180,0.06);
+	transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 160ms ease, opacity 120ms ease, filter 160ms ease;
+}
+.search-clear-pill-left:active { transform: translateY(-1px) scale(1.01); }
+.search-clear-pill-left:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* 3D / tactile interactions for pill-like CTAs (hover & touch) */
+.search-clear-pill, .search-clear-pill-left, .interactive-cta {
+	will-change: transform, box-shadow, filter;
+	transform-origin: center bottom;
+}
+.search-clear-pill:hover, .search-clear-pill-left:hover, .interactive-cta:hover {
+	transform: translateY(-6px) rotateX(6deg) scale(1.03);
+	box-shadow: 0 26px 60px rgba(255,110,150,0.18), 0 8px 26px rgba(0,0,0,0.08);
+	filter: saturate(1.06) brightness(1.02);
+}
+.search-clear-pill:active, .search-clear-pill-left:active, .interactive-cta:active {
+	transform: translateY(-2px) rotateX(0deg) scale(0.98);
+	box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+.search-clear-pill:focus-visible, .search-clear-pill-left:focus-visible, .interactive-cta:focus-visible {
+	outline: none;
+	box-shadow: 0 10px 30px rgba(255,120,160,0.12), 0 0 0 6px rgba(255,140,170,0.08);
+}
+
+/* Touch-friendly stronger feedback on coarse pointers */
+@media (pointer: coarse) {
+	.search-clear-pill:hover, .search-clear-pill-left:hover, .interactive-cta:hover { transform: translateY(-3px) scale(1.02); }
+	.search-clear-pill:active, .search-clear-pill-left:active, .interactive-cta:active { transform: translateY(0) scale(0.98); }
+}
+
+/* small decorative ripple on click (visual only) */
+.interactive-cta { position: relative; overflow: hidden; font-weight: 700; letter-spacing: 0.6px; padding-left: 26px; padding-right: 26px; }
+
+/* polished specular highlight and refined shadows to make the CTA look more realistic */
+.interactive-cta::before {
+	content: '';
+	position: absolute; left: 0; right: 0; top: 0; height: 52%;
+	/* softer, warmer specular highlight */
+	background: linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,240,245,0.06));
+	mix-blend-mode: overlay;
+	border-top-left-radius: 999px; border-top-right-radius: 999px;
+	pointer-events: none; opacity: 0.96;
+}
+.interactive-cta {
+	/* richer layered pinks + corner shading */
+	background: linear-gradient(135deg,#ff88b5 0%, #ff4f8f 45%, #d32a6f 100%) !important;
+	/* subtle darker corner to mimic depth */
+	background-image: linear-gradient(135deg,#ff88b5 0%, #ff4f8f 45%, #d32a6f 100%), radial-gradient(circle at 86% 86%, rgba(0,0,0,0.12), rgba(0,0,0,0) 35%);
+	border: 1px solid rgba(155,18,60,0.55) !important;
+	box-shadow: 0 8px 22px rgba(145,30,80,0.14), inset 0 -6px 14px rgba(0,0,0,0.06);
+	transition: transform 240ms cubic-bezier(.2,.9,.2,1), box-shadow 240ms ease, filter 200ms ease;
+}
+
+/* slightly stronger hover but refined (less rotation, more lift + specular) */
+.interactive-cta:hover {
+	transform: translateY(-8px) scale(1.035);
+	box-shadow: 0 34px 86px rgba(142,30,96,0.20), inset 0 -8px 20px rgba(0,0,0,0.08);
+	filter: saturate(1.1) contrast(1.03);
+}
+
+/* subtle pressed inset */
+.interactive-cta:active {
+	transform: translateY(-2px) scale(0.995);
+	box-shadow: 0 6px 18px rgba(0,0,0,0.12), inset 0 6px 12px rgba(255,255,255,0.02);
+}
+
+/* refined ripple remains but more subtle */
+.interactive-cta::after {
+	content: '';
+	position: absolute;
+	left: 50%; top: 50%; transform: translate(-50%,-50%) scale(0);
+	width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(255,255,255,0.12), rgba(255,200,225,0.02));
+	opacity: 0; transition: transform 360ms cubic-bezier(.2,.9,.2,1), opacity 320ms ease;
+	pointer-events: none; border-radius: 999px;
+}
+.interactive-cta:active::after { transform: translate(-50%,-50%) scale(1); opacity: 0.9; transition: transform 120ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease; }
+
+/* make the Refresh text slightly larger and more elegant */
+.interactive-cta { font-size: 16px; line-height: 1.05; padding-top: 10px; padding-bottom: 10px; }
+
+/* Interactive, shiny hover for the whole search area */
+.search-wrap { position: relative; }
+.search-wrap .explore-search { transition: box-shadow 220ms ease, transform 160ms cubic-bezier(.2,.9,.2,1), filter 220ms ease; }
+.search-wrap:hover .explore-search { transform: translateY(-2px); box-shadow: 0 30px 60px rgba(255,110,150,0.12); filter: saturate(1.05) brightness(1.02); }
+.search-wrap:hover .search-clear-pill-left { transform: translateY(-1px) scale(1.02); box-shadow: 0 14px 36px rgba(255,120,170,0.12); }
+
+/* Subtle icon interaction */
+.search-wrap .search-icon svg { transition: transform 220ms cubic-bezier(.2,.9,.2,1), color 160ms ease, opacity 160ms ease; }
+.search-wrap:hover .search-icon svg { transform: rotate(-8deg) scale(1.06); color: #e11d48; opacity: 0.98; }
+
+/* small layout tweak so the left clear pill doesn't overlap the small clear 'x' */
+.search-wrap .absolute.right-20 { right: 5.5rem; }
+
+
+/* Dark mode overrides: keep pink accents but use darker/gray surfaces for comfortable night reading */
+.dark .genre-toggle { background: linear-gradient(180deg,#0b1116,#0a0f14); border-color: rgba(255,255,255,0.03); }
+.dark .genre-placeholder { color: #ffb6d9; }
+.dark .genre-pill { background: linear-gradient(90deg, rgba(40,24,32,0.6), rgba(32,18,26,0.6)); color: #ffd6e6; box-shadow: 0 8px 22px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.03); }
+
+.dark .genre-search { background: linear-gradient(180deg,#0b1220,#071018); border: 1px solid rgba(255,255,255,0.04); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); color: #f6d7e3; }
+.dark .genre-search::placeholder { color: #9b7a89; }
+
+.dark .genre-chip { background: linear-gradient(180deg,#081018,#0b1117); border: 1px solid rgba(255,255,255,0.03); color: #ffdce8; }
+.dark .genre-chip:hover { box-shadow: 0 10px 30px rgba(8,6,10,0.6); transform: translateY(-1px); }
+.dark .genre-chip.selected { background: linear-gradient(90deg,#23121a,#2a121b); border-color: rgba(255,120,160,0.08); }
+.dark .genre-chip.selected::before { background: linear-gradient(180deg,#7b2140,#b33a5b); box-shadow: 0 8px 22px rgba(179,58,91,0.12); }
+
+.dark .genre-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#7b2140,#b33a5b); border-radius: 8px; border: 2px solid rgba(0,0,0,0.35); }
+
+.dark .checkbox-box { background: linear-gradient(180deg,#0b1116,#071014); border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 8px 22px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02); }
+.dark .checkbox-box svg { filter: drop-shadow(0 1px 0 rgba(0,0,0,0.6)); }
+.dark .native-checkbox:focus + .checkbox-box { box-shadow: 0 0 0 8px rgba(179,58,91,0.06), 0 8px 22px rgba(0,0,0,0.6); }
+.dark .native-checkbox:checked + .checkbox-box { background: linear-gradient(180deg,#8b2c4d,#c84a6b); border-color: rgba(255,120,160,0.95); box-shadow: 0 18px 44px rgba(200,74,107,0.18); }
+.dark .native-checkbox:checked + .checkbox-box svg { opacity:1; transform:scale(1); }
+
+.dark .done-btn { background: linear-gradient(180deg,#8b2c4d,#c84a6b); border-color: rgba(255,120,160,0.16); box-shadow: 0 12px 36px rgba(0,0,0,0.6); color: #fff; }
+.dark .done-btn .done-check { background: linear-gradient(180deg,#b33a5b,#8b2140); border: 1px solid rgba(255,255,255,0.03); }
+
+.dark .search-suggestions {
+	/* override Tailwind's dark utility so dropdown stays on-brand (pink) */
+	background: linear-gradient(180deg, rgba(255,245,248,0.98), rgba(255,238,244,0.98)) !important;
+	border: 1px solid rgba(184,59,98,0.08) !important;
+	box-shadow: 0 20px 50px rgba(255,120,160,0.06) !important;
+}
+.dark .search-suggestions > div:first-child {
+	background: linear-gradient(90deg, rgba(255,240,245,0.95), rgba(255,245,248,0.98)) !important;
+	color: #9b1838 !important;
+	border-bottom: 1px solid rgba(184,59,98,0.06) !important;
+}
+.dark .search-suggestions button { border-bottom: 1px solid rgba(255,230,235,0.5) !important; }
+.dark .search-suggestions button:hover { background: linear-gradient(90deg, rgba(255,230,238,0.9), rgba(255,240,245,0.92)) !important; box-shadow: 0 12px 30px rgba(255,140,180,0.06) !important; }
+.dark .search-suggestions .thumb { background: linear-gradient(180deg,#fff6f9,#fff1f4) !important; border: 1px solid rgba(255,220,230,0.6) !important; box-shadow: 0 6px 14px rgba(255,160,190,0.04) !important; }
+.dark .search-suggestions .meta .title { color: #9b1838 !important; }
+.dark .search-suggestions .meta .sub { color: #8a5b63 !important; }
+.dark .search-suggestions .chev { color: #e11d48 !important; }
+
+.dark .search-clear-pill, .dark .search-clear-pill-left {
+	/* Keep the clear pill pink in dark mode to match the light design (image 1).
+	   Use !important to override broad dark-mode color rules. */
+	background: linear-gradient(180deg,#ffd8e8,#ff9fbf) !important;
+	color: #7a0e3a !important;
+	border: 1px solid rgba(255,140,170,0.5) !important;
+	box-shadow: 0 8px 20px rgba(255,150,180,0.06) !important;
+}
+.dark .search-wrap:hover .explore-search { box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 40px rgba(200,70,110,0.04); filter: saturate(1.02) brightness(0.96); }
+
+.dark .search-wrap:hover .search-clear-pill-left { box-shadow: 0 14px 36px rgba(0,0,0,0.6); transform: translateY(-1px) scale(1.02); }
+
+/* Force the genre dropdown to render in light/pink mode even when the
+	 global `dark` class is present (scoped overrides for the popup). */
+.genre-dropdown-light {
+	background: linear-gradient(180deg,#fff6f8,#fff1f4) !important;
+	border: 1px solid rgba(255,200,220,0.6) !important;
+	color: #5e2333 !important;
+}
+.genre-dropdown-light .genre-search {
+	background: linear-gradient(90deg, #fff, #fff6f9) !important;
+	border: 1px solid rgba(255,200,220,0.6) !important;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.6) !important;
+	color: #6b1130 !important;
+}
+.genre-dropdown-light .genre-list { background: transparent !important; }
+.genre-dropdown-light .genre-chip {
+	background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,250,250,0.96)) !important;
+	border: 1px solid rgba(255,220,230,0.6) !important;
+	color: #6b1130 !important;
+}
+.genre-dropdown-light .genre-chip:hover { box-shadow: 0 10px 24px rgba(255,160,200,0.06) !important; transform: translateY(-2px) !important; }
+.genre-dropdown-light .genre-chip.selected::before { background: linear-gradient(180deg,#ffb6d9,#ff6fa6) !important; }
+.genre-dropdown-light .checkbox-box { background:#fff !important; border:2px solid rgba(255,190,205,0.6) !important; box-shadow: 0 8px 22px rgba(255,160,190,0.06) !important; }
+.genre-dropdown-light .native-checkbox:checked + .checkbox-box { background: linear-gradient(180deg,#ff7aa3,#ff4f83) !important; border-color: rgba(255,70,120,0.95) !important; }
+.genre-dropdown-light .done-btn {
+	background: linear-gradient(180deg,#ff98b8,#ff5f91) !important;
+	color: white !important;
+	border: 2px solid rgba(255,90,140,0.95) !important;
+	box-shadow: 0 10px 22px rgba(255,110,150,0.12) !important;
+}
+.genre-dropdown-light .done-btn .done-check {
+	/* Match the base .done-check so the inner square and check look identical
+	   to the primary Done button (image 1). Keep !important to override
+	   the dropdown's lighter surface but use the same dimensions/visuals. */
+	width: 22px !important;
+	height: 22px !important;
+	min-width: 22px !important;
+	border-radius: 7px !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	background: linear-gradient(180deg,#ffb6d9,#ff6fa6) !important;
+	border: 2px solid rgba(255,200,215,0.65) !important;
+	box-shadow: 0 5px 14px rgba(255,120,160,0.05) !important;
+	color: #ffffff !important;
+	font-size: 14px !important;
+	transform: translateY(0) !important;
+	transition: transform 180ms cubic-bezier(.2,.9,.2,1) !important;
+}
+.genre-dropdown-light .done-btn:active .done-check { transform: translateY(-2px) scale(1.02) !important; }
+.genre-dropdown-light .genre-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#ffd7e6,#ff9fbf) !important; border-radius: 8px !important; }
+
+/* Highlight selected rows using aria-selected so it works with the current markup
+   (labels use role="option" and aria-selected). These rules mirror the
+   .selected styles but target the aria attribute and are scoped to the
+   genre-dropdown-light popup so they don't affect the rest of the app. */
+.genre-dropdown-light .genre-chip[aria-selected="true"] {
+	background: linear-gradient(90deg,#ffeaf2,#ffd4e6) !important;
+	color: #6b1130 !important;
+	border-color: rgba(255,200,215,0.6) !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 10px 24px rgba(255,160,200,0.06) !important;
+}
+.genre-dropdown-light .genre-chip[aria-selected="true"]::before {
+	content: '' !important;
+	position: absolute !important;
+	left: 0 !important;
+	top: 6px !important;
+	bottom: 6px !important;
+	width: 6px !important;
+	border-top-left-radius: 8px !important;
+	border-bottom-left-radius: 8px !important;
+	background: linear-gradient(180deg,#ffb6d9,#ff6fa6) !important;
+	box-shadow: 0 6px 18px rgba(255,120,160,0.06) !important;
+	z-index: 1 !important;
+}
+.genre-dropdown-light .genre-chip[aria-selected="true"] .checkbox-box {
+	background: linear-gradient(180deg,#ff98b8,#ff5f91) !important;
+	border-color: rgba(255,90,140,0.95) !important;
+	box-shadow: 0 16px 36px rgba(255,110,150,0.16) !important;
+	transform: translateY(-2px) scale(1.02) !important;
+}
+.genre-dropdown-light .genre-chip[aria-selected="true"] .checkbox-box svg {
+	opacity: 1 !important;
+	transform: scale(1) !important;
+}
+
+
+/* Light-mode: slightly deepen card borders and shadows so the page reads a bit darker */
+.premium-pink-bg { background: linear-gradient(180deg,#fff7f9 0%, #fff0f4 100%); }
+.premium-pink-bg .container { box-shadow: 0 14px 40px rgba(245,185,200,0.06); }
+.glass-card { background: linear-gradient(180deg,#fff6f8,#fff1f4) !important; border: 1px solid rgba(220,70,120,0.16) !important; box-shadow: 0 14px 36px rgba(245,140,175,0.08) !important; }
+.book-image-wrap { background: linear-gradient(180deg,#fff3f6,#fff0f3) !important; border: 1px solid rgba(220,70,120,0.12) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 26px rgba(245,140,175,0.06) !important; }
+.glass-card { transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease, filter 200ms ease; will-change: transform, box-shadow, filter; }
+.glass-card:focus-within, .glass-card:hover {
+	transform: translateY(-8px) scale(1.02);
+	box-shadow: 0 36px 88px rgba(245,110,160,0.14), 0 12px 36px rgba(0,0,0,0.06) !important;
+}
+
+/* when hovering the image area or the card, make the whole card respond and the cover pop slightly */
+.glass-card:hover .book-image-wrap, .glass-card:focus-within .book-image-wrap {
+	transform: translateY(-6px) scale(1.01);
+	box-shadow: 0 28px 72px rgba(245,120,170,0.12), inset 0 2px 0 rgba(255,255,255,0.6);
+}
+.glass-card:hover .cover-img, .glass-card:focus-within .cover-img {
+	transform: scale(1.04) translateZ(0);
+	box-shadow: 0 20px 46px rgba(0,0,0,0.08);
+	transition: transform 320ms cubic-bezier(.2,.9,.2,1), box-shadow 320ms ease;
+}
+
+/* subtle specular highlight over the cover when hovered */
+.glass-card:hover .book-image-wrap::after, .glass-card:focus-within .book-image-wrap::after {
+	content: '';
+	position: absolute;
+	left: 8%; right: 8%; top: 6%; height: 30%;
+	background: linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,240,245,0.02));
+	border-radius: 10px;
+	pointer-events: none;
+	mix-blend-mode: overlay;
+}
+
+/* dark-mode friendly hover */
+.dark .glass-card:hover {
+	transform: translateY(-6px) scale(1.01);
+	box-shadow: 0 30px 64px rgba(0,0,0,0.6), 0 10px 30px rgba(110,30,60,0.06) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	.glass-card:hover {
+		transform: translateY(-6px) scale(1.01);
+		box-shadow: 0 30px 64px rgba(0,0,0,0.6), 0 10px 30px rgba(110,30,60,0.06) !important;
+	}
+}
+
+/* Book card CTAs (large pill buttons used in the book cards) */
+.book-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 24px;
+	border-radius: 999px;
+	font-weight: 800;
+	font-size: 15px;
+	line-height: 1;
+	text-decoration: none;
+	transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, filter 180ms ease;
+	box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+	cursor: pointer;
+}
+.book-cta:focus { outline: none; box-shadow: 0 12px 30px rgba(0,0,0,0.12), 0 0 0 6px rgba(255,140,170,0.06); }
+
+/* Primary CTA (darker pink) */
+.book-cta.interactive-cta {
+	color: #fff;
+}
+
+/* Muted/secondary CTA (lighter pink like "On TBR") */
+.book-cta--muted {
+	background: linear-gradient(180deg,#ffd8e8,#ff9fbf);
+	color: #7a0e3a;
+	border: 1px solid rgba(255,140,170,0.5);
+	box-shadow: 0 12px 30px rgba(245,140,170,0.06);
+}
+.book-cta--muted:active { transform: translateY(-1px) scale(0.995); }
+.book-cta--muted:hover {
+	transform: translateY(-6px) scale(1.02) rotateX(4deg);
+	box-shadow: 0 28px 72px rgba(245,120,170,0.14), 0 8px 26px rgba(0,0,0,0.06);
+	filter: saturate(1.04) brightness(1.01);
+}
+.book-cta--muted:focus-visible {
+	box-shadow: 0 18px 44px rgba(245,120,170,0.12), 0 0 0 6px rgba(255,200,215,0.10);
+}
+
+/* specular highlight for muted pill (subtle) */
+.book-cta--muted::before {
+	content: '';
+	position: absolute;
+	left: 0; right: 0; top: 0; height: 56%;
+	border-top-left-radius: 999px; border-top-right-radius: 999px;
+	background: linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,250,250,0.02));
+	mix-blend-mode: overlay; pointer-events: none; opacity: 0.95;
+}
+.book-cta--muted:active::before { transform: translateY(2px); }
+
+/* Primary styling if not using interactive-cta class on top */
+.book-cta:not(.book-cta--muted) {
+	background: linear-gradient(135deg,#ff3566 0%, #e11d48 60%);
+	color: #fff;
+	border: 1px solid rgba(140,20,60,0.6);
+	box-shadow: 0 14px 40px rgba(225,45,85,0.14), inset 0 -6px 14px rgba(0,0,0,0.04);
+}
+
+/* Small responsive tweak */
+@media (max-width: 640px) {
+	.book-cta { padding: 10px 18px; font-size: 14px; }
+}
+.search-suggestions { border: 1px solid rgba(220,70,120,0.12); box-shadow: 0 24px 48px rgba(245,140,175,0.06); }
+.search-suggestions > div:first-child { color: #a3214a; }
+.search-suggestions .thumb { background: #fff0f3; border: 1px solid rgba(220,70,120,0.12); box-shadow: 0 6px 18px rgba(245,140,175,0.04); }
+
+
+/* Page-level dark layout: central rounded panel and layered greys like the reference image */
+.dark .premium-pink-bg {
+	background: radial-gradient(1200px 500px at 10% 10%, rgba(20,30,40,0.35), transparent 10%), linear-gradient(180deg,#0b1220 0%, #0b1016 100%);
+}
+.dark .premium-pink-bg .premium-header-decor { opacity: 0.12; }
+
+.dark .premium-pink-bg .container {
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	border-radius: 20px;
+	padding: 2.5rem !important;
+	box-shadow: 0 20px 60px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* cards (book tiles) should use a mid-gray card to contrast against the panel */
+.dark .glass-card {
+	background: linear-gradient(180deg,#1e2731,#232a33) !important;
+	border: 1px solid rgba(255,255,255,0.02) !important;
+	box-shadow: 0 12px 36px rgba(3,8,14,0.6) !important;
+	color: #e8d7e1;
+}
+
+/* image frame: slightly lighter slate so cover stands out */
+.dark .book-image-wrap {
+	background: linear-gradient(180deg,#2b3642,#27323c) !important;
+	border: 1px solid rgba(255,255,255,0.03) !important;
+	box-shadow: inset 0 2px 0 rgba(255,255,255,0.015), 0 8px 20px rgba(0,0,0,0.55);
+}
+.dark .book-image-wrap .cover-img { border-radius: 8px; box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
+
+/* remove "oval curve" sheen from buttons and book covers in dark mode */
+.dark .book-cta--muted::before,
+.dark .glass-card:hover .book-image-wrap::after,
+.dark .glass-card:focus-within .book-image-wrap::after {
+	display: none !important;
+}
+
+/* buttons keep the purple but pop against mid-gray */
+.dark .glass-card .bg-rose-600 { background: linear-gradient(180deg,#9b4bd0,#7a2ab8) !important; }
+.dark .glass-card .bg-pink-500 { background: linear-gradient(180deg,#b24bd0,#9228b0) !important; }
+
+/* tweak skeleton backgrounds for layered greys */
+.dark .LoadingSkeleton, .dark .animate-pulse { background: transparent !important; }
+
+
+/* FORCE search suggestions to stay LIGHT regardless of OS dark mode */
+@media (prefers-color-scheme: dark) {
+	.search-suggestions {
+		background: linear-gradient(180deg, rgba(255,245,248,0.98), rgba(255,238,244,0.98)) !important;
+		border: 1px solid rgba(220,70,120,0.12) !important;
+		box-shadow: 0 24px 48px rgba(245,140,175,0.08) !important;
+	}
+
+	.search-suggestions > div:first-child {
+		background: linear-gradient(90deg, rgba(255,240,245,0.95), rgba(255,245,248,0.98)) !important;
+		color: #a3214a !important;
+		border-bottom: 1px solid rgba(220,70,120,0.12) !important;
+	}
+
+	.search-suggestions button {
+		border-bottom: 1px solid rgba(255,220,230,0.6) !important;
+		background: transparent !important;
+	}
+
+	.search-suggestions button:hover {
+		background: linear-gradient(90deg,#ffeaf2,#ffd4e6) !important;
+		box-shadow: 0 10px 24px rgba(255,160,200,0.08) !important;
+	}
+
+	.search-suggestions .thumb {
+		background: #fff0f3 !important;
+		border: 1px solid rgba(220,70,120,0.12) !important;
+	}
+
+	.search-suggestions .meta .title {
+		color: #9b1838 !important;
+	}
+
+	.search-suggestions .meta .sub {
+		color: #8a5b63 !important;
+	}
+}
+

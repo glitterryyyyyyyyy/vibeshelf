@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sentence-transformers
+scikit-learn
+numpy
+requests
+pandas
+PyPDF2
+ebooklib
+beautifulsoup4
+PyMySQL
